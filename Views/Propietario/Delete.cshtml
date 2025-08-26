@@ -1,0 +1,11 @@
+@model INMOBILIARIA__Oliva_Perez.Models.Propietario
+@{
+    ViewData["Title"] = "Eliminar Propietario";
+}
+<h2>Eliminar Propietario</h2>
+<div class="alert alert-warning">¿Eliminar a <strong>@Model.Nombre @Model.Apellido</strong>?</div>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

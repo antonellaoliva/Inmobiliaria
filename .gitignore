@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userprefs
+*.log
+*.cache
+*.DS_Store
+appsettings.Development.json
+**/Properties/launchSettings.json
