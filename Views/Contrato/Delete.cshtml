@@ -1,0 +1,24 @@
+@model INMOBILIARIA__Oliva_Perez.Models.Contrato
+
+<div class="card mt-4">
+    <div class="card-header">
+        Eliminar Contrato
+    </div>
+    <div class="card-body">
+        <p>¿Seguro que desea eliminar el contrato del 
+           <strong>Inmueble:</strong> @ViewBag.InmuebleDireccion
+           con <strong>Inquilino:</strong> @ViewBag.InquilinoNombre?</p>
+        <p><strong>Fecha Inicio:</strong> @Model.FechaInicio.ToShortDateString()</p>
+        <p><strong>Fecha Fin:</strong> @Model.FechaFin.ToShortDateString()</p>
+        <p><strong>Monto:</strong> @Model.Monto</p>
+
+        <form asp-action="DeleteConfirmed" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+
+

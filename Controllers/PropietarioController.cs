@@ -1,24 +1,22 @@
-using System.Security.Cryptography.X509Certificates;
 using INMOBILIARIA__Oliva_Perez.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace INMOBILIARIA__Oliva_Perez.Controllers
 {
     public class PropietarioController : Controller
     {
-        private readonly RepositorioPropietario repo;
+        private readonly RepositorioPropietario repoPropietario;
 
-        public PropietarioController(IConfiguration config)
+        public PropietarioController(IConfiguration configuration)
         {
-            repo = new RepositorioPropietario(config.GetConnectionString("DefaultConnection"));
+            repoPropietario = new RepositorioPropietario(configuration);
 
         }
-        public IActionResult Index() => View(repo.ObtenerTodos());
+        public IActionResult Index() => View(repoPropietario.ObtenerTodos());
 
         public IActionResult Details(int id)
         {
-            var p = repo.ObtenerPorId(id);
+            var p = repoPropietario.ObtenerPorId(id);
             if (p == null) return NotFound();
             return View(p);
         }
@@ -29,13 +27,13 @@ namespace INMOBILIARIA__Oliva_Perez.Controllers
         public IActionResult Create(Propietario p)
         {
             if (!ModelState.IsValid) return View(p);
-            repo.Alta(p);
+            repoPropietario.Alta(p);
             return RedirectToAction(nameof(Index));
 
         }
         public IActionResult Edit(int id)
         {
-            var p = repo.ObtenerPorId(id);
+            var p = repoPropietario.ObtenerPorId(id);
             if (p == null) return NotFound();
             return View(p);
         }
@@ -45,13 +43,13 @@ namespace INMOBILIARIA__Oliva_Perez.Controllers
         {
             if (id != p.Id) return BadRequest();
             if (!ModelState.IsValid) return View(p);
-            repo.Modificar(p);
+            repoPropietario.Modificar(p);
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(int id)
         {
-            var p = repo.ObtenerPorId(id);
+            var p = repoPropietario.ObtenerPorId(id);
             if (p == null) return NotFound();
             return View(p);
         }
@@ -59,7 +57,7 @@ namespace INMOBILIARIA__Oliva_Perez.Controllers
         [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            repo.Baja(id);
+            repoPropietario.Baja(id);
             return RedirectToAction(nameof(Index));
         }
 

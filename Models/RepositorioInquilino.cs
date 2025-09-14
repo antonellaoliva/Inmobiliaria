@@ -6,10 +6,9 @@ using Org.BouncyCastle.Asn1.Cms;
 
 namespace INMOBILIARIA__Oliva_Perez.Models
 {
-    public class RepositorioInquilino
+    public class RepositorioInquilino : RepositorioBase
     {
-        public readonly string connectionString;
-        public RepositorioInquilino(string connectionString) => this.connectionString = connectionString;
+         public RepositorioInquilino(IConfiguration configuration) : base(configuration) { }
 
         public List<Inquilino> ObtenerTodos()
         {

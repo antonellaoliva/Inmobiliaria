@@ -1,0 +1,24 @@
+@model INMOBILIARIA__Oliva_Perez.Models.Inmueble
+
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Detalle del Inmueble
+            </div>
+
+    <div class="card-body">
+        <h5 class="card-title">@Model.Direccion</h5>
+        <p class="card-text"><strong>Uso:</strong> @Model.Uso</p>
+        <p class="card-text"><strong>Tipo:</strong> @Model.Tipo</p>
+        <p class="card-text"><strong>Ambientes:</strong> @Model.Ambientes</p>
+        <p class="card-text"><strong>Latitud:</strong> @Model.Latitud</p>
+        <p class="card-text"><strong>Longitud:</strong> @Model.Longitud</p>
+        <p class="card-text"><strong>Precio:</strong> $@Model.Precio.ToString("N2")</p>
+        <p class="card-text"><strong>Propietario:</strong> @Model.Propietario.Nombre @Model.Propietario.Apellido</p>
+        <p class="card-text"><strong>Estado:</strong> @(Model.Estado ? "Activo" : "Inactivo")</p>
+    </div>
+</div>
+
+<a class="btn btn-primary" href="@Url.Action("Edit", new { id=Model.Id })">Editar</a>
+<a class="btn btn-secondary" href="@Url.Action("Index")">Volver</a>

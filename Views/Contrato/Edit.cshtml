@@ -1,0 +1,38 @@
+@model INMOBILIARIA__Oliva_Perez.Models.Contrato
+@{
+    ViewData["Title"] = "Editar Contrato";
+}
+
+<h2>Editar Contrato</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Inmueble</label>
+        <select asp-for="InmuebleId" asp-items="ViewBag.Inmuebles" class="form-select"></select>
+    </div>
+
+    <div class="mb-3">
+        <label>Inquilino</label>
+        <select asp-for="InquilinoId" asp-items="ViewBag.Inquilinos" class="form-select"></select>
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha Inicio</label>
+        <input asp-for="FechaInicio" class="form-control" type="date" />
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha Fin</label>
+        <input asp-for="FechaFin" class="form-control" type="date" />
+    </div>
+
+    <div class="mb-3">
+        <label>Monto</label>
+        <input asp-for="Monto" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>

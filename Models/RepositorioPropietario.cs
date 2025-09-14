@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Data;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Asn1.Cms;
+
 
 namespace INMOBILIARIA__Oliva_Perez.Models
 {
-    public class RepositorioPropietario
+    public class RepositorioPropietario : RepositorioBase
     {
-        public readonly string connectionString;
-        public RepositorioPropietario(string connectionString) => this.connectionString = connectionString;
-
+        public RepositorioPropietario(IConfiguration configuration) : base(configuration) { }
         public List<Propietario> ObtenerTodos()
         {
             var lista = new List<Propietario>();

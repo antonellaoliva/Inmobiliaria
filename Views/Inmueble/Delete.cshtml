@@ -1,0 +1,24 @@
+@model INMOBILIARIA__Oliva_Perez.Models.Inmueble
+
+<h2>Eliminar Inmueble</h2>
+
+<div class="alert alert-danger">
+    <p>¿Está seguro que desea eliminar el siguiente inmueble?</p>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Direccion</h5>
+        <p class="card-text"><strong>Uso:</strong> @Model.Uso</p>
+        <p class="card-text"><strong>Tipo:</strong> @Model.Tipo</p>
+        <p class="card-text"><strong>Ambientes:</strong> @Model.Ambientes</p>
+        <p class="card-text"><strong>Precio:</strong> $@Model.Precio.ToString("N2")</p>
+        <p class="card-text"><strong>Propietario:</strong> @Model.Propietario.Nombre @Model.Propietario.Apellido</p>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a class="btn btn-secondary" href="@Url.Action("Index")">Cancelar</a>
+</form>

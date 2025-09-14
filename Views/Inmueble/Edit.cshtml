@@ -1,0 +1,83 @@
+@model INMOBILIARIA__Oliva_Perez.Models.Inmueble
+
+<h2>Editar inmueble</h2>
+
+@if (ViewBag.Errores != null)
+{
+    <div class="alert alert-danger">
+        @Html.Raw(ViewBag.Errores)
+    </div>
+}
+
+<form asp-action="Edit" method="post" class="row g-3">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="col-md-6">
+        <label class="form-label">Dirección</label>
+        <input type="text" class="form-control" asp-for="Direccion" required />
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label">Uso</label>
+        <select class="form-select" asp-for="Uso" required>
+            <option value="">Seleccione...</option>
+            @foreach (var uso in Enum.GetValues(typeof(INMOBILIARIA__Oliva_Perez.Models.UsoInmueble)))
+            {
+                <option value="@uso" selected="@(Model.Uso == (INMOBILIARIA__Oliva_Perez.Models.UsoInmueble)uso)">
+                    @uso
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label">Tipo</label>
+        <input type="text" class="form-control" asp-for="Tipo" required />
+    </div>
+
+    <div class="col-md-2">
+        <label class="form-label">Ambientes</label>
+        <input type="number" class="form-control" asp-for="Ambientes" min="1" required />
+    </div>
+
+    <div class="col-md-2">
+        <label class="form-label">Latitud</label>
+        <input type="number" step="0.0000001" class="form-control" asp-for="Latitud" required />
+    </div>
+
+    <div class="col-md-2">
+        <label class="form-label">Longitud</label>
+        <input type="number" step="0.0000001" class="form-control" asp-for="Longitud" required />
+    </div>
+
+    <div class="col-md-2">
+        <label class="form-label">Precio</label>
+        <input type="number" step="0.01" class="form-control" asp-for="Precio" required />
+    </div>
+
+    <div class="col-md-2">
+        <label class="form-label">Propietario</label>
+        <select class="form-select" asp-for="PropietarioId" required>
+            <option value="">Seleccione...</option>
+            @foreach (var prop in ViewBag.Propietarios)
+            {
+                <option value="@prop.Id" selected="@(prop.Id == Model.PropietarioId)">
+                    @prop.Nombre @prop.Apellido
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <label class="form-label">Estado</label>
+        <select class="form-select" asp-for="Estado">
+            <option value="true" selected="@(Model.Estado)">Disponible</option>
+            <option value="false" selected="@(!Model.Estado)">No disponible</option>
+        </select>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Guardar cambios</button>
+        <a class="btn btn-secondary" href="@Url.Action("Index")">Cancelar</a>
+    </div>
+</form>

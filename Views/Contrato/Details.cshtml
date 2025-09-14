@@ -1,0 +1,26 @@
+@model dynamic
+
+@{
+    ViewData["Title"] = "Detalle del Contrato";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            Detalle del Contrato
+        </div>
+        <div class="card-body">
+            <p><strong>Inmueble:</strong> @Model.InmuebleDireccion</p>
+            <p><strong>Inquilino:</strong> @Model.InquilinoNombre</p>
+            <p><strong>Fecha Inicio:</strong> @Model.FechaInicio.ToShortDateString()</p>
+            <p><strong>Fecha Fin:</strong> @Model.FechaFin.ToShortDateString()</p>
+            <p><strong>Monto:</strong> $@Model.Monto</p>
+
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+            <a asp-action="Index" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+</div>
+
+
+
