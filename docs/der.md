@@ -1,5 +1,17 @@
 ```mermaid
 erDiagram
+
+  USUARIO {
+    int id PK
+    string email
+    string password
+    string nombre
+    string apellido
+    string avatar
+    enum rol
+  }
+
+  erDiagram
     USUARIO {
         int id PK
         string email
@@ -12,7 +24,7 @@ erDiagram
 
     PROPIETARIO {
         int id PK
-        string dni UNI
+        string dni 
         string nombre
         string apellido
         string telefono
@@ -21,7 +33,7 @@ erDiagram
 
     INQUILINO {
         int id PK
-        string dni UNI
+        string dni 
         string nombre
         string apellido
         string telefono
