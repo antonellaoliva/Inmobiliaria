@@ -4,9 +4,9 @@ erDiagram
         int id PK
         string email
         string password
-        string nombre NULL
-        string apellido NULL
-        string avatar NULL
+        string nombre
+        string apellido
+        string avatar
         enum rol
     }
 
@@ -15,8 +15,8 @@ erDiagram
         string dni UNI
         string nombre
         string apellido
-        string telefono NULL
-        string email NULL
+        string telefono
+        string email
     }
 
     INQUILINO {
@@ -24,8 +24,8 @@ erDiagram
         string dni UNI
         string nombre
         string apellido
-        string telefono NULL
-        string email NULL
+        string telefono
+        string email
     }
 
     TIPOINMUEBLE {
@@ -53,10 +53,10 @@ erDiagram
         decimal monto
         int inquilino_id FK
         int inmueble_id FK
-        datetime creado_en NULL
-        int creado_por FK NULL
-        datetime terminado_en NULL
-        int terminado_por FK NULL
+        datetime creado_en
+        int creado_por FK
+        datetime terminado_en
+        int terminado_por FK
         enum estado
     }
 
@@ -67,10 +67,10 @@ erDiagram
         decimal monto
         int contrato_id FK
         date fechaUpdate
-        datetime anulado_en NULL
-        int anulado_por FK NULL
-        datetime creado_en NULL
-        int creado_por FK NULL
+        datetime anulado_en
+        int anulado_por FK
+        datetime creado_en
+        int creado_por FK
         enum estado
     }
 
