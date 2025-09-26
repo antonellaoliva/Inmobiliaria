@@ -1,0 +1,34 @@
+@model INMOBILIARIA__Oliva_Perez.Models.Usuario
+@{
+    ViewData["Title"] = "Detalle de Usuario";
+}
+
+<h2>Detalle del Usuario</h2>
+
+<dl class="row">
+    <dt class="col-sm-3">Nombre</dt>
+    <dd class="col-sm-9">@Model.Nombre</dd>
+
+    <dt class="col-sm-3">Apellido</dt>
+    <dd class="col-sm-9">@Model.Apellido</dd>
+
+    <dt class="col-sm-3">Email</dt>
+    <dd class="col-sm-9">@Model.Email</dd>
+
+    <dt class="col-sm-3">Rol</dt>
+    <dd class="col-sm-9">@Model.Rol</dd>
+
+    <dt class="col-sm-3">Avatar</dt>
+    <dd class="col-sm-9">
+        @if (!string.IsNullOrEmpty(Model.Avatar))
+        {
+            <img src="@Model.Avatar" class="img-thumbnail" style="max-height:150px;" />
+        }
+        else
+        {
+            <em>Sin avatar</em>
+        }
+    </dd>
+</dl>
+
+<a asp-action="Index" class="btn btn-secondary">Volver</a>

@@ -1,53 +1,53 @@
 @model INMOBILIARIA__Oliva_Perez.Models.Contrato
 
 @{
-    ViewData["Title"] = "Nuevo Contrato";
-
-
-    var listaInmuebles = ViewBag.Inmuebles as List<INMOBILIARIA__Oliva_Perez.Models.Inmueble> ?? new List<INMOBILIARIA__Oliva_Perez.Models.Inmueble>();
-    var listaInquilinos = ViewBag.Inquilinos as List<INMOBILIARIA__Oliva_Perez.Models.Inquilino> ?? new List<INMOBILIARIA__Oliva_Perez.Models.Inquilino>();
+    ViewData["Title"] = "Nuevo contrato";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2>Nuevo contrato</h2>
 
-<form asp-action="Create" method="post" class="row g-3">
-    <div class="col-md-4">
-        <label asp-for="FechaInicio" class="form-label"></label>
-        <input asp-for="FechaInicio" class="form-control" type="date" required />
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.InmuebleId, "Inmueble")
+        @Html.DropDownListFor(model => model.InmuebleId,
+            new SelectList(ViewBag.Inmuebles, "Id", "Direccion"),
+            "Seleccione un inmueble", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.InmuebleId, "", new { @class = "text-danger" })
     </div>
 
-    <div class="col-md-4">
-        <label asp-for="FechaFin" class="form-label"></label>
-        <input asp-for="FechaFin" class="form-control" type="date" required />
+    <div class="form-group">
+        @Html.LabelFor(model => model.InquilinoId, "Inquilino")
+        @Html.DropDownListFor(model => model.InquilinoId,
+            new SelectList(ViewBag.Inquilinos, "Id", "Nombre"),
+            "Seleccione un inquilino", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.InquilinoId, "", new { @class = "text-danger" })
     </div>
 
-    <div class="col-md-4">
-        <label asp-for="Monto" class="form-label"></label>
-        <input asp-for="Monto" class="form-control" step="0.01" required />
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaInicio)
+        @Html.TextBoxFor(model => model.FechaInicio, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
     </div>
 
-    <div class="col-md-4">
-        <label asp-for="InmuebleId" class="form-label"></label>
-        <select asp-for="InmuebleId" class="form-select" asp-items="@(new SelectList(listaInmuebles, "Id", "Direccion"))" required>
-            <option value="">Seleccione un inmueble...</option>
-        </select>
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaFin)
+        @Html.TextBoxFor(model => model.FechaFin, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
     </div>
 
-    <div class="col-md-4">
-        <label asp-for="InquilinoId" class="form-label"></label>
-        <select asp-for="InquilinoId" class="form-select" asp-items="@(new SelectList(listaInquilinos, "Id", "Nombre"))" required>
-            <option value="">Seleccione un inquilino...</option>
-        </select>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Monto)
+        @Html.TextBoxFor(model => model.Monto, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Monto, "", new { @class = "text-danger" })
     </div>
 
-    <div class="col-md-12">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-    </div>
-</form>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
 }
+
+
 
 

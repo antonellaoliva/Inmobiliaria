@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace INMOBILIARIA__Oliva_Perez.Models
 {
@@ -14,10 +15,6 @@ namespace INMOBILIARIA__Oliva_Perez.Models
         [Display(Name = "Uso")]
         public UsoInmueble Uso { get; set; }
 
-        [Required(ErrorMessage = "El tipo es obligatorio.")]
-        [Display(Name = "Tipo")]
-        public string Tipo { get; set; } = string.Empty;
-
         [Required(ErrorMessage = "Debe indicar la cantidad de ambientes.")]
         [Range(1, 20, ErrorMessage = "La cantidad de ambientes debe ser entre 1 y 20.")]
         [Display(Name = "Ambientes")]
@@ -25,10 +22,12 @@ namespace INMOBILIARIA__Oliva_Perez.Models
 
         [Required(ErrorMessage = "La latitud es obligatoria.")]
         [Display(Name = "Latitud")]
+        [Range(-90, 90, ErrorMessage = "Latitud inválida")]
         public decimal? Latitud { get; set; }
 
         [Required(ErrorMessage = "La longitud es obligatoria.")]
         [Display(Name = "Longitud")]
+        [Range(-180, 180, ErrorMessage = "Longitud inválida")]
         public decimal? Longitud { get; set; }
 
         [Required(ErrorMessage = "El precio es obligatorio.")]
@@ -41,9 +40,16 @@ namespace INMOBILIARIA__Oliva_Perez.Models
 
         [Required(ErrorMessage = "Debe seleccionar un propietario.")]
         [Display(Name = "Propietario")]
-        public int PropietarioId { get; set; } 
+        public int PropietarioId { get; set; }
 
         public Propietario? Propietario { get; set; }
+
+        [Required(ErrorMessage = "Debe seleccionar un tipo de inmueble.")]
+        [Display(Name = "Tipo de Inmueble")]
+        public int TipoInmuebleId { get; set; }
+
+        [ValidateNever]
+        public TipoInmueble Tipo { get; set; }
     }
 
     public enum UsoInmueble

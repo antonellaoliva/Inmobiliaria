@@ -1,0 +1,25 @@
+@model INMOBILIARIA__Oliva_Perez.Models.Contrato
+
+@{
+    ViewData["Title"] = "Terminar Contrato";
+}
+
+<h2>Terminar Contrato</h2>
+
+<div class="alert alert-warning">
+    <h4>⚠ Atención</h4>
+    <p>Está a punto de <strong>finalizar anticipadamente</strong> el contrato:</p>
+    <ul>
+        <li><b>Inmueble:</b> @Model.Inmueble?.Direccion</li>
+        <li><b>Inquilino:</b> @Model.Inquilino?.Nombre @Model.Inquilino?.Apellido</li>
+        <li><b>Vigencia original:</b> @Model.FechaInicio.ToShortDateString() - @Model.FechaFin.ToShortDateString()</li>
+        <li><b>Monto:</b> @Model.Monto.ToString("C")</li>
+    </ul>
+    <p>¿Está seguro de que desea finalizar este contrato?</p>
+</div>
+
+<form asp-action="TerminarConfirmado" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sí, terminar contrato</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

@@ -1,0 +1,49 @@
+@model INMOBILIARIA__Oliva_Perez.Models.Contrato
+
+@{
+    ViewData["Title"] = "Renovar Contrato";
+}
+
+<h2>Renovar Contrato</h2>
+
+<div class="card p-4">
+    <form asp-action="Renovar" method="post">
+        <input type="hidden" asp-for="InmuebleId" />
+        <input type="hidden" asp-for="InquilinoId" />
+
+        <div class="mb-3">
+            <label class="form-label">Inmueble</label>
+            <p>@ViewBag.Inmueble.Direccion</p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Inquilino</label>
+            <p>@ViewBag.Inquilino.Nombre @ViewBag.Inquilino.Apellido</p>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="FechaInicio" class="form-label"></label>
+            <input asp-for="FechaInicio" class="form-control" type="date" />
+            <span asp-validation-for="FechaInicio" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="FechaFin" class="form-label"></label>
+            <input asp-for="FechaFin" class="form-control" type="date" />
+            <span asp-validation-for="FechaFin" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Monto" class="form-label"></label>
+            <input asp-for="Monto" class="form-control" />
+            <span asp-validation-for="Monto" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Renovación</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

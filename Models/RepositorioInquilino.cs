@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Data;
 using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Asn1.Cms;
+
 
 namespace INMOBILIARIA__Oliva_Perez.Models
 {
@@ -54,6 +51,28 @@ namespace INMOBILIARIA__Oliva_Perez.Models
             }
             return x;
         }
+
+        public bool ExisteDNI(string dni, int idActual = 0)
+            {
+                using (var conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    var query = "SELECT COUNT(*) FROM inquilino WHERE DNI = @dni";
+
+                    if (idActual > 0)
+                        query += " AND id <> @id";
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@dni", dni);
+                        if (idActual > 0)
+                            cmd.Parameters.AddWithValue("@id", idActual);
+
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+                        return count > 0;
+                    }
+                }
+            }
 
         public int Alta(Inquilino x)
         {

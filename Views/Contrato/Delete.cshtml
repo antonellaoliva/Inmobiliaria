@@ -1,5 +1,36 @@
 @model INMOBILIARIA__Oliva_Perez.Models.Contrato
 
+@{
+    ViewData["Title"] = "Eliminar Contrato";
+}
+
+<div class="container mt-4">
+    <h2>¿Seguro que deseas eliminar este contrato?</h2>
+
+    <dl class="row">
+        <dt class="col-sm-2">Inmueble</dt>
+        <dd class="col-sm-10">@Model.Inmueble?.Direccion</dd>
+
+        <dt class="col-sm-2">Inquilino</dt>
+        <dd class="col-sm-10">@($"{Model.Inquilino?.Nombre} {Model.Inquilino?.Apellido}")</dd>
+
+        <dt class="col-sm-2">Fecha Inicio</dt>
+        <dd class="col-sm-10">@Model.FechaInicio.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">Fecha Fin</dt>
+        <dd class="col-sm-10">@Model.FechaFin.ToShortDateString()</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+
+@* @model INMOBILIARIA__Oliva_Perez.Models.Contrato
+
 <div class="card mt-4">
     <div class="card-header">
         Eliminar Contrato
@@ -18,7 +49,7 @@
             <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
-</div>
+</div> *@
 
 
 

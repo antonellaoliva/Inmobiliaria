@@ -1,0 +1,24 @@
+@model INMOBILIARIA__Oliva_Perez.Models.Pago
+@{
+    ViewData["Title"] = "Eliminar Pago";
+}
+
+<h2>Eliminar Pago</h2>
+
+<h4>¿Está seguro que desea anular este pago?</h4>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>Número de pago:</strong> @Model.NumeroPago</p>
+        <p><strong>Fecha de pago:</strong> @Model.FechaPago.ToShortDateString()</p>
+        <p><strong>Monto:</strong> @Model.Monto</p>
+        <p><strong>Contrato:</strong> @Model.ContratoId</p>
+        <p><strong>Estado:</strong> @Model.Estado</p>
+    </div>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Anular</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zF7ebp5XCzs=",
+  "dgSpecHash": "TAHRFj3Bgno=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Anto\\Desktop\\INMOBILIARIA- Oliva Perez\\INMOBILIARIA- Oliva Perez.csproj",
+  "projectFilePath": "C:\\Users\\Anto\\Desktop\\INMOBILIARIA-OLIVA\\INMOBILIARIA-OLIVA.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Anto\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",
     "C:\\Users\\Anto\\.nuget\\packages\\google.protobuf\\3.30.0\\google.protobuf.3.30.0.nupkg.sha512",

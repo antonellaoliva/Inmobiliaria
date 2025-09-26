@@ -1,4 +1,67 @@
 @model INMOBILIARIA__Oliva_Perez.Models.Contrato
+
+@{
+    ViewData["Title"] = "Editar contrato";
+}
+
+<h2>Editar contrato</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.InmuebleId, "Inmueble")
+        @Html.DropDownListFor(model => model.InmuebleId,
+            new SelectList(ViewBag.Inmuebles, "Id", "Direccion", Model.InmuebleId),
+            "Seleccione un inmueble", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.InmuebleId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.InquilinoId, "Inquilino")
+        @Html.DropDownListFor(model => model.InquilinoId,
+            new SelectList(ViewBag.Inquilinos, "Id", "Nombre", Model.InquilinoId),
+            "Seleccione un inquilino", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.InquilinoId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaInicio)
+        @Html.TextBoxFor(model => model.FechaInicio, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.FechaInicio, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaFin)
+        @Html.TextBoxFor(model => model.FechaFin, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.FechaFin, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Monto)
+        @Html.TextBoxFor(model => model.Monto, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Monto, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Estado)
+        @Html.DropDownListFor(model => model.Estado,
+            new SelectList(Enum.GetValues(typeof(INMOBILIARIA__Oliva_Perez.Models.EstadoContrato))),
+            "Seleccione un estado", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Estado, "", new { @class = "text-danger" })
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+}
+
+
+
+
+@* @model INMOBILIARIA__Oliva_Perez.Models.Contrato
 @{
     ViewData["Title"] = "Editar Contrato";
 }
@@ -35,4 +98,4 @@
 
     <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
-</form>
+</form> *@

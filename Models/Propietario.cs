@@ -6,19 +6,19 @@ namespace INMOBILIARIA__Oliva_Perez.Models
     {
         public int Id { get; set; }
 
-        [Required, StringLength(20)]
+        [Required(ErrorMessage ="El dni es obligatorio"), StringLength(20)]
         public string DNI { get; set; } = string.Empty;
 
-        [Required, StringLength(100)]
+        [Required(ErrorMessage ="El nombre el obligatorio"), StringLength(100)]
         public string Nombre { get; set; } = string.Empty;
 
-        [Required, StringLength(100)]
+        [Required(ErrorMessage ="El apellido el obligatorio"), StringLength(100)]
         public string Apellido { get; set; } = string.Empty;
 
         [StringLength(20)]
         public string? Telefono { get; set; }
 
-        [EmailAddress, StringLength(100)]
+        [EmailAddress(ErrorMessage ="El email no tiene formato valido"), StringLength(100)]
         public string? Email { get; set; }
 
 

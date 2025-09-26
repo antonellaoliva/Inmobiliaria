@@ -1,0 +1,51 @@
+@model List<INMOBILIARIA__Oliva_Perez.Models.Pago>
+@{
+    ViewData["Title"] = "Pagos";
+    var usuarios = ViewBag.Usuarios as Dictionary<int, string> ?? new Dictionary<int, string>();
+}
+
+<h2>Pagos</h2>
+
+<p>
+    <a class="btn btn-succes" asp-action="Create">
+    <i class="bi bi-plus-circle"></i> Nuevo</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Número de pago</th>
+            <th>Fecha de pago</th>
+            <th>Monto</th>
+            <th>Contrato</th>
+            <th>Estado</th>
+            <th>Última actualización</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pago in Model)
+        {
+            <tr>
+                <td>@pago.NumeroPago</td>
+                <td>@pago.FechaPago.ToShortDateString()</td>
+                <td>@pago.Monto</td>
+                <td>@pago.ContratoId</td>
+                <td>@pago.Estado</td>
+                @* <td>@(pago.CreadoPor.HasValue && usuarios.ContainsKey(pago.CreadoPor.Value) ? usuarios[pago.CreadoPor.Value] : "Desconocido")</td> *@
+                <td>@(pago.FechaUpdate.ToShortDateString() )</td>
+                <td>
+                    <a class="btn btn-sm btn-info btn-sm me-1" asp-action="Details" asp-route-id="@pago.Id">
+                    <i class="bi bi-eye"></i>
+                    </a>
+                    <a class="btn btn-sm btn-warning btn-sm me-1" asp-action="Edit" asp-route-id="@pago.Id">
+                    <i class="bie bi-pencil-square"></i>
+                    </a>
+                    <a class="btn btn-sm btn-danger btn-sm me-1" asp-action="Delete" asp-route-id="@pago.Id">
+                    <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

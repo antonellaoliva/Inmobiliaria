@@ -6,6 +6,63 @@ namespace INMOBILIARIA__Oliva_Perez.Models
     public class RepositorioPropietario : RepositorioBase
     {
         public RepositorioPropietario(IConfiguration configuration) : base(configuration) { }
+
+        public IList<Propietario> ObtenerPaginado(int pagina, int tamPagina)
+        {
+            var lista = new List<Propietario>();
+
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+
+                var sql = @"
+                    SELECT id, dni, nombre, apellido, telefono, email
+                    FROM propietario
+                    ORDER BY apellido, nombre
+                    LIMIT @offset, @tamPagina;
+                ";
+
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@offset", (pagina - 1) * tamPagina);
+                    cmd.Parameters.AddWithValue("@tamPagina", tamPagina);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var prop = new Propietario
+                            {
+                                Id = Convert.ToInt32(reader["id"]),
+                                DNI = reader["dni"].ToString() ?? string.Empty,
+                                Nombre = reader["nombre"].ToString() ?? string.Empty,
+                                Apellido = reader["apellido"].ToString() ?? string.Empty,
+                                Telefono = reader["telefono"] != DBNull.Value ? reader["telefono"].ToString() : null,
+                                Email = reader["email"] != DBNull.Value ? reader["email"].ToString() : null
+                            };
+                            lista.Add(prop);
+                        }
+                    }
+                }
+            }
+
+            return lista;
+        }
+
+        public int ContarPropietarios()
+        {
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                conn.Open();
+                var sql = "SELECT COUNT(*) FROM propietario;";
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+        }
+
+
         public List<Propietario> ObtenerTodos()
         {
             var lista = new List<Propietario>();
@@ -27,6 +84,8 @@ namespace INMOBILIARIA__Oliva_Perez.Models
             }
             return lista;
         }
+
+        
 
         public Propietario ObtenerPorId(int id)
         {
@@ -50,6 +109,30 @@ namespace INMOBILIARIA__Oliva_Perez.Models
             }
             return p;
         }
+
+
+        public bool ExisteDNI(string dni, int idActual = 0)
+            {
+                using (var conn = new MySqlConnection(connectionString))
+                {
+                    conn.Open();
+                    var query = "SELECT COUNT(*) FROM propietario WHERE DNI = @dni";
+
+                    if (idActual > 0)
+                        query += " AND id <> @id";
+
+                    using (var cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@dni", dni);
+                        if (idActual > 0)
+                            cmd.Parameters.AddWithValue("@id", idActual);
+
+                        int count = Convert.ToInt32(cmd.ExecuteScalar());
+                        return count > 0;
+                    }
+                }
+            }
+
 
         public int Alta(Propietario p)
         {

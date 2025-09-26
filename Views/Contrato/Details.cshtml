@@ -1,26 +1,108 @@
-@model dynamic
-
+@model INMOBILIARIA__Oliva_Perez.Models.Contrato
 @{
-    ViewData["Title"] = "Detalle del Contrato";
+    ViewData["Title"] = "Detalle Contrato";
+    var usuarios = ViewBag.Usuarios as Dictionary<int, string> ?? new Dictionary<int, string>();
 }
 
 <div class="container mt-4">
-    <div class="card">
-        <div class="card-header bg-primary text-white">
-            Detalle del Contrato
-        </div>
-        <div class="card-body">
-            <p><strong>Inmueble:</strong> @Model.InmuebleDireccion</p>
-            <p><strong>Inquilino:</strong> @Model.InquilinoNombre</p>
-            <p><strong>Fecha Inicio:</strong> @Model.FechaInicio.ToShortDateString()</p>
-            <p><strong>Fecha Fin:</strong> @Model.FechaFin.ToShortDateString()</p>
-            <p><strong>Monto:</strong> $@Model.Monto</p>
+    <h2>Detalle del Contrato</h2>
 
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
-            <a asp-action="Index" class="btn btn-secondary">Volver</a>
-        </div>
-    </div>
+    <dl class="row">
+        <dt class="col-sm-2">Inmueble</dt>
+        <dd class="col-sm-10">@Model.Inmueble?.Direccion</dd>
+
+        <dt class="col-sm-2">Inquilino</dt>
+        <dd class="col-sm-10">@($"{Model.Inquilino?.Nombre} {Model.Inquilino?.Apellido}")</dd>
+
+        <dt class="col-sm-2">Fecha Inicio</dt>
+        <dd class="col-sm-10">@Model.FechaInicio.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">Fecha Fin</dt>
+        <dd class="col-sm-10">@Model.FechaFin.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">Monto</dt>
+        <dd class="col-sm-10">@Model.Monto.ToString("C")</dd>
+
+        <dt class="col-sm-2">Estado</dt>
+        <dd class="col-sm-10">@Model.Estado</dd>
+    </dl>
+
+    @if (ViewBag.EsAdmin)
+{
+
+    <h4 class="mt-4">Auditoría</h4>
+    <dl class="row">
+        <dt class="col-sm-2">Creado por</dt>
+        <dd class="col-sm-10">
+            @(Model.CreadoPor.HasValue && usuarios.ContainsKey(Model.CreadoPor.Value) 
+                ? usuarios[Model.CreadoPor.Value] 
+                : "Desconocido")
+        </dd>
+
+        <dt class="col-sm-2">Fecha creación</dt>
+        <dd class="col-sm-10">@Model.CreadoEn?.ToString("g")</dd>
+
+        <dt class="col-sm-2">Terminado por</dt>
+        <dd class="col-sm-10">
+            @(Model.TerminadoPor.HasValue && usuarios.ContainsKey(Model.TerminadoPor.Value) 
+                ? usuarios[Model.TerminadoPor.Value] 
+                : "Desconocido")
+        </dd>
+
+        <dt class="col-sm-2">Fecha de terminación</dt>
+        <dd class="col-sm-10">@Model.TerminadoEn?.ToString("g")</dd>
+    </dl>
+    }
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
 </div>
 
 
+@* @model INMOBILIARIA__Oliva_Perez.Models.Contrato
 
+@{
+    ViewData["Title"] = "Detalle Contrato";
+}
+
+<div class="container mt-4">
+    <h2>Detalle del Contrato</h2>
+
+    <dl class="row">
+        <dt class="col-sm-2">Inmueble</dt>
+        <dd class="col-sm-10">@Model.Inmueble?.Direccion</dd>
+
+        <dt class="col-sm-2">Inquilino</dt>
+        <dd class="col-sm-10">@($"{Model.Inquilino?.Nombre} {Model.Inquilino?.Apellido}")</dd>
+
+        <dt class="col-sm-2">Fecha Inicio</dt>
+        <dd class="col-sm-10">@Model.FechaInicio.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">Fecha Fin</dt>
+        <dd class="col-sm-10">@Model.FechaFin.ToShortDateString()</dd>
+
+        <dt class="col-sm-2">Monto</dt>
+        <dd class="col-sm-10">@Model.Monto.ToString("C")</dd>
+
+        <dt class="col-sm-2">Estado</dt>
+        <dd class="col-sm-10">@Model.Estado</dd>
+    </dl>
+
+    <h4 class="mt-4">Auditoría</h4>
+    <dl class="row">
+        <dt class="col-sm-2">Creado por</dt>
+        <dd class="col-sm-10">@Model.CreadoPor</dd>
+
+        <dt class="col-sm-2">Fecha creación</dt>
+        <dd class="col-sm-10">@Model.CreadoEn?.ToString("g")</dd>
+
+        <dt class="col-sm-2">Terminado por</dt>
+        <dd class="col-sm-10">@Model.TerminadoPor</dd>
+
+        <dt class="col-sm-2">Fecha de terminación</dt>
+        <dd class="col-sm-10">@Model.TerminadoEn?.ToString("g")</dd>
+    </dl>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</div> *@

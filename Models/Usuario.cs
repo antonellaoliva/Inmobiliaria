@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace INMOBILIARIA__Oliva_Perez.Models
 {
     public class Usuario
-    { 
+    {
         [Display(Name = "Codigo")]
         public int Id { get; set; }
 
@@ -18,9 +18,13 @@ namespace INMOBILIARIA__Oliva_Perez.Models
 
         public string Password { get; set; } = string.Empty;
 
-        public string Avatar { get; set; } = string.Empty;
+        public string Avatar { get; set; } = "/Uploads/default-avatar.png";
 
         [Required]
         public string Rol { get; set; } = "Empleado";
+
+        public IFormFile? AvatarFile { get; set; }
+
+        public string AvatarUrl => string.IsNullOrWhiteSpace(Avatar) ? "/Uploads/default-avatar.png" : Avatar;
     }
 }

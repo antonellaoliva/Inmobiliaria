@@ -1553,11 +1553,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Anto\\Desktop\\INMOBILIARIA- Oliva Perez\\INMOBILIARIA- Oliva Perez.csproj",
-      "projectName": "INMOBILIARIA- Oliva Perez",
-      "projectPath": "C:\\Users\\Anto\\Desktop\\INMOBILIARIA- Oliva Perez\\INMOBILIARIA- Oliva Perez.csproj",
+      "projectUniqueName": "C:\\Users\\Anto\\Desktop\\INMOBILIARIA-OLIVA\\INMOBILIARIA-OLIVA.csproj",
+      "projectName": "INMOBILIARIA-OLIVA",
+      "projectPath": "C:\\Users\\Anto\\Desktop\\INMOBILIARIA-OLIVA\\INMOBILIARIA-OLIVA.csproj",
       "packagesPath": "C:\\Users\\Anto\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Anto\\Desktop\\INMOBILIARIA- Oliva Perez\\obj\\",
+      "outputPath": "C:\\Users\\Anto\\Desktop\\INMOBILIARIA-OLIVA\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Anto\\AppData\\Roaming\\NuGet\\NuGet.Config"

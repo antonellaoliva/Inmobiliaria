@@ -1,0 +1,56 @@
+@model INMOBILIARIA__Oliva_Perez.Models.Usuario
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<h2>Editar Usuario</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Apellido" class="form-label"></label>
+        <input asp-for="Apellido" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Rol" class="form-label"></label>
+        <select asp-for="Rol" class="form-select"
+                asp-items='@(new List<SelectListItem> {
+                    new SelectListItem { Text = "Administrador", Value = "Administrador" },
+                    new SelectListItem { Text = "Empleado", Value = "Empleado" }
+        })'>
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+        <label>Avatar actual</label><br />
+        @if (!string.IsNullOrEmpty(Model.Avatar))
+        {
+            <img src="@Model.Avatar" alt="Avatar" class="img-thumbnail mb-2" style="max-height: 150px;" />
+        }
+        else
+        {
+            <em>Sin avatar</em>
+        }
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="AvatarFile" class="form-label">Nuevo Avatar</label>
+        <input asp-for="AvatarFile" type="file" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

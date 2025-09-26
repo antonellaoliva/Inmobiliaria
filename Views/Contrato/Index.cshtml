@@ -1,4 +1,4 @@
-@model IEnumerable<dynamic>
+@model IEnumerable<INMOBILIARIA__Oliva_Perez.Models.Contrato>
 
 @{
     ViewData["Title"] = "Contratos";
@@ -7,16 +7,18 @@
 <div class="container mt-4">
     <h2>Contratos</h2>
     <a asp-action="Create" class="btn btn-success mb-2">
-        <i class="bi bi-plus-circle"></i> Nuevo</a>
+        <i class="bi bi-plus-circle"></i> Nuevo contrato
+    </a>
 
-    <table class="table table-striped table-borderer">
+    <table class="table table-striped">
         <thead class="table-info">
-            <tr class="table-ligth">
+            <tr>
                 <th>Inmueble</th>
                 <th>Inquilino</th>
                 <th>Fecha Inicio</th>
                 <th>Fecha Fin</th>
                 <th>Monto</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -24,11 +26,12 @@
             @foreach (var contrato in Model)
             {
                 <tr>
-                    <td>@contrato.InmuebleDireccion</td>
-                    <td>@contrato.InquilinoNombre</td>
+                    <td>@contrato.Inmueble?.Direccion</td>
+                    <td>@($"{contrato.Inquilino?.Nombre} {contrato.Inquilino?.Apellido}")</td>
                     <td>@contrato.FechaInicio.ToShortDateString()</td>
                     <td>@contrato.FechaFin.ToShortDateString()</td>
-                    <td>@contrato.Monto</td>
+                    <td>@contrato.Monto.ToString("C")</td>
+                    <td>@contrato.Estado</td>
                     <td>
                         <a asp-action="Details" asp-route-id="@contrato.Id" class="btn btn-info btn-sm me-1">
                             <i class="bi bi-eye"></i>
@@ -39,12 +42,43 @@
                         <a asp-action="Delete" asp-route-id="@contrato.Id" class="btn btn-danger btn-sm">
                             <i class="bi bi-trash"></i>
                         </a>
+                         @if (contrato.Estado == EstadoContrato.Activo)
+                    {
+                        <a class="btn btn-sm btn-success" href="@Url.Action("Renovar", "Contrato", new { id = contrato.Id })">
+                        <i class="bi bi-arrow-clockwise"></i>
+                        </a>
+
+                        <a class="btn btn-sm btn-danger" href="@Url.Action("Terminar", "Contrato", new { id = contrato.Id })">
+                        <i class="bi bi-x-circle"></i>
+                        </a>
+                    }
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+@if (ViewBag.TotalPaginas > 1)
+{
+    <nav aria-label="Paginación">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(ViewBag.PaginaActual == 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { pagina = ViewBag.PaginaActual - 1 })">Anterior</a>
+            </li>
+
+            @for (int i = 1; i <= ViewBag.TotalPaginas; i++)
+            {
+                <li class="page-item @(i == ViewBag.PaginaActual ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { pagina = i })">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(ViewBag.PaginaActual == ViewBag.TotalPaginas ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { pagina = ViewBag.PaginaActual + 1 })">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+}
 
 
 

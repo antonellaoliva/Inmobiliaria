@@ -1,8 +1,10 @@
 using INMOBILIARIA__Oliva_Perez.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace INMOBILIARIA__Oliva_Perez.Controllers
 {
+    [Authorize]
     public class InquilinoController : Controller
     {
         private readonly RepositorioInquilino repoInquilino;
@@ -26,6 +28,9 @@ namespace INMOBILIARIA__Oliva_Perez.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Create(Inquilino x)
         {
+            if (repoInquilino.ExisteDNI(x.DNI))
+                ModelState.AddModelError("Dni", "Este DNI ya está registrado.");
+
             if (!ModelState.IsValid) return View(x);
             repoInquilino.Alta(x);
             return RedirectToAction(nameof(Index));
@@ -41,12 +46,17 @@ namespace INMOBILIARIA__Oliva_Perez.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Inquilino x)
         {
+            if (repoInquilino.ExisteDNI(x.DNI, x.Id))
+                ModelState.AddModelError("Dni", "Este DNI ya está registrado.");
+
             if (id != x.Id) return BadRequest();
             if (!ModelState.IsValid) return View(x);
+
             repoInquilino.Modificar(x);
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Administrador")]
         public IActionResult Delete(int id)
         {
             var x = repoInquilino.ObtenerPorId(id);
@@ -54,7 +64,9 @@ namespace INMOBILIARIA__Oliva_Perez.Controllers
             return View(x);
         }
 
-        [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Administrador")]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             repoInquilino.Baja(id);
