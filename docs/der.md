@@ -1,16 +1,4 @@
 ```mermaid
-erDiagram
-
-  USUARIO {
-    int id PK
-    string email
-    string password
-    string nombre
-    string apellido
-    string avatar
-    enum rol
-  }
-
   erDiagram
     USUARIO {
         int id PK
